@@ -1,0 +1,133 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:StudentsMonitoringProgress.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="StudentsMonitoringProgress.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="StudentsMonitoringProgress">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <!-- Устанавливаем DataContext для окна -->
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Window.Styles>
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBlock.h2">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBlock.h3">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Styles>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Первая строка для шапки -->
+            <RowDefinition Height="2.5*"/> <!-- Строка для вывода оценок и ФИО студентов -->
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+  
+        <!-- Шапка в первой строке -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Первая строка для шапки -->
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Classes="h1" Text="оценки за контрольный срок"/>
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.4*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Шапка списка студентов -->
+                <TextBlock Classes="h2" Text="ФИО" Grid.Column="0"/>
+                <TextBlock Classes="h2" Text="ВПиЧМВ" Grid.Column="1"/>
+                <TextBlock Classes="h2" Text="Мат.анализ" Grid.Column="2"/>
+                <TextBlock Classes="h2" Text="ЭЭС" Grid.Column="3"/>
+                <TextBlock Classes="h2" Text="Выч.мат" Grid.Column="4"/>
+                <TextBlock Classes="h2" Text="Физ-ра" Grid.Column="5"/>
+                <TextBlock Classes="h2" Text="АЭВМ" Grid.Column="6"/>
+                <TextBlock Classes="h2" Text="Сети" Grid.Column="7"/>
+                <TextBlock Classes="h2" Text="СРЕДНИЙ&#x0a;БАЛЛ" Grid.Column="8"/>
+                <Border Grid.Row="0" Grid.Column="0"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="1"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="2"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="3"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="4"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="5"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="6"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="7"  BorderBrush="Black"  BorderThickness="1" />
+                <Border Grid.Row="0" Grid.Column="8"  BorderBrush="Black"  BorderThickness="1" />
+            </Grid>
+        </Grid>
+        <!-- Список студентов и оценок во второй строке -->
+        <ListBox Grid.Row="1" Items="{Binding Students}" SelectedIndex="{Binding Index}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1.4*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Classes="h2" Text="{Binding Name}" Grid.Column="0"/>
+                        <TextBlock Classes="h2" Text="{Binding VisualProg}" Grid.Column="1"/>
+                        <TextBlock Classes="h2" Text="{Binding MathAnalysis}" Grid.Column="2"/>
+                        <TextBlock Classes="h2" Text="{Binding EES}" Grid.Column="3"/>
+                        <TextBlock Classes="h2" Text="{Binding ComputerMath}" Grid.Column="4"/>
+                        <TextBlock Classes="h2" Text="{Binding PhysicalSport}" Grid.Column="5"/>
+                        <TextBlock Classes="h2" Text="{Binding AEVM}" Grid.Column="6"/>
+                        <TextBlock Classes="h2" Text="{Binding Networks}" Grid.Column="7"/>
+                        <TextBlock Classes="h2" Text="{Binding AverageMark}" Grid.Column="8"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- ... -->
+        
+    </Grid>
+
+</Window>
