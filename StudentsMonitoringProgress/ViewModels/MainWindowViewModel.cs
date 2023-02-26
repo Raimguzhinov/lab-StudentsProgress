@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+
 using System.Reactive;
 using ReactiveUI;
 using StudentsMonitoringProgress.Models;
@@ -37,6 +38,8 @@ namespace StudentsMonitoringProgress.ViewModels
             Students = new ObservableCollection<Student>();
             AddStudentCommand = ReactiveCommand.Create(AddStudent);
             DeleteStudentCommand = ReactiveCommand.Create(DeleteStudent);
+            SaveCommand = ReactiveCommand.Create(ExecuteSaveCommand);
+            UploadCommand = ReactiveCommand.Create(ExecuteUploadCommand);
             // заполнение случайными данными
             Random rnd = new Random();
             string[] names = { "Максим Назипов", "Владислав Перчун", "Константин Ефремов", "Диас Раймгужинов", "Даниил Шлипев", "Сергей Малеев" };
@@ -82,17 +85,20 @@ namespace StudentsMonitoringProgress.ViewModels
             double averageArchitecture = Math.Round(sumArchitecture / count, 2);
             double averageNetworks = Math.Round(sumNetworks / count, 2);
             // Устанавливаем значения свойств для отображения в интерфейсе
-            ScVisualProg = averageVisualProg.ToString(CultureInfo.CurrentCulture);
-            ScMathAnalysis = averageMathAnalysis.ToString(CultureInfo.CurrentCulture);
-            ScElectrotechnic = averageElectrotechnic.ToString(CultureInfo.CurrentCulture);
-            ScComputerMath = averageComputerMath.ToString(CultureInfo.CurrentCulture);
-            ScPhysicalSport = averagePhysicalSport.ToString(CultureInfo.CurrentCulture);
-            ScArchitecture = averageArchitecture.ToString(CultureInfo.CurrentCulture);
-            ScNetworks = averageNetworks.ToString(CultureInfo.CurrentCulture);
-            ScAverageMark = Math.Round((averageVisualProg + averageMathAnalysis + averageElectrotechnic + averageComputerMath + averagePhysicalSport + averageArchitecture + averageNetworks) / 7, 2).ToString(CultureInfo.CurrentCulture);
+            ScVisualProg = averageVisualProg.ToString(CultureInfo.InvariantCulture);
+            ScMathAnalysis = averageMathAnalysis.ToString(CultureInfo.InvariantCulture);
+            ScElectrotechnic = averageElectrotechnic.ToString(CultureInfo.InvariantCulture);
+            ScComputerMath = averageComputerMath.ToString(CultureInfo.InvariantCulture);
+            ScPhysicalSport = averagePhysicalSport.ToString(CultureInfo.InvariantCulture);
+            ScArchitecture = averageArchitecture.ToString(CultureInfo.InvariantCulture);
+            ScNetworks = averageNetworks.ToString(CultureInfo.InvariantCulture);
+            ScAverageMark = Math.Round((averageVisualProg + averageMathAnalysis + averageElectrotechnic + averageComputerMath + averagePhysicalSport + averageArchitecture + averageNetworks) / 7, 2).ToString(CultureInfo.InvariantCulture);
         }
         public ReactiveCommand<Unit, Unit> AddStudentCommand { get; }
         public ReactiveCommand<Unit, Unit> DeleteStudentCommand { get; }
+        public ReactiveCommand<Unit, Unit> SaveCommand { get; }
+        public ReactiveCommand<Unit, Unit> UploadCommand { get; }
+
         private void AddStudent()
         {
             Student newStudent = new Student()
@@ -107,13 +113,53 @@ namespace StudentsMonitoringProgress.ViewModels
                 Networks = SelectedNetworksGrade
             };
             Students.Add(newStudent);
+            UpdateScAverageMarks();
             OnPropertyChanged(nameof(Students));
         }
         private void DeleteStudent()
         {
             Student selectedStudent = Students[Index];
             Students.Remove(selectedStudent);
+            UpdateScAverageMarks();
             OnPropertyChanged(nameof(Students));
+        }
+        private void UpdateScAverageMarks()
+        {
+            if (Students.Count == 0)
+            {
+                ScAverageMark = ScVisualProg = ScMathAnalysis = ScElectrotechnic = ScComputerMath = ScPhysicalSport = ScArchitecture = ScNetworks = 0.ToString();
+            }
+            else
+            {
+                double total = 0, totalVisualProg = 0, totalMathAnalysis = 0, totalElectrotechnic = 0, totalComputerMath = 0, totalPhysicalSport = 0, totalArchitecture = 0, totalNetworks = 0;
+                foreach (Student student in Students)
+                {
+                    total += student.AverageMark;
+                    totalVisualProg += student.VisualProg;
+                    totalMathAnalysis += student.MathAnalysis;
+                    totalElectrotechnic += student.Electrotechnic;
+                    totalComputerMath += student.ComputerMath;
+                    totalPhysicalSport += student.PhysicalSport;
+                    totalArchitecture += student.Architecture;
+                    totalNetworks += student.Networks;
+                }
+                ScAverageMark = (total / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScVisualProg = (totalVisualProg / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScMathAnalysis = (totalMathAnalysis / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScElectrotechnic = (totalElectrotechnic / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScComputerMath = (totalComputerMath / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScPhysicalSport = (totalPhysicalSport / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScArchitecture = (totalArchitecture / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScNetworks = (totalNetworks / Students.Count).ToString(CultureInfo.InvariantCulture);
+            }
+            OnPropertyChanged(nameof(ScAverageMark));
+            OnPropertyChanged(nameof(ScVisualProg));
+            OnPropertyChanged(nameof(ScMathAnalysis));
+            OnPropertyChanged(nameof(ScElectrotechnic));
+            OnPropertyChanged(nameof(ScComputerMath));
+            OnPropertyChanged(nameof(ScPhysicalSport));
+            OnPropertyChanged(nameof(ScArchitecture));
+            OnPropertyChanged(nameof(ScNetworks));
         }
         public string ScAverageMark { get; set; }
         public string ScNetworks { get; set; }
@@ -176,6 +222,15 @@ namespace StudentsMonitoringProgress.ViewModels
         {
             get => _gradeChoices;
             set => this.RaiseAndSetIfChanged(ref _gradeChoices, value);
+        }
+        private void ExecuteSaveCommand()
+        {
+            Serialization.SaveDataToXmlFile(Students, "../../../StudentsData.xml");
+        }
+        private void ExecuteUploadCommand()
+        {
+            Students = Serialization.LoadDataFromXmlFile("../../../StudentsData.xml");
+            UpdateScAverageMarks();
         }
         protected void OnPropertyChanged(string propName)
         {

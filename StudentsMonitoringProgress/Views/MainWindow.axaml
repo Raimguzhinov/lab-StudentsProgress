@@ -230,8 +230,24 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Classes="h2" Text="    добавить/удалить студента    " Grid.Column="0"/>
-            <Button Content="Добавить" Command="{Binding AddStudentCommand}" Classes="h2" Grid.Row="0" Grid.Column="1"/>
-            <Button Content="Удалить" Command="{Binding DeleteStudentCommand}" Classes="h2" Grid.Row="0" Grid.Column="2"/>
+            <Button Content="добавить" Command="{Binding AddStudentCommand}" Classes="h2" Grid.Row="0" Grid.Column="1"/>
+            <Button Content="удалить" Command="{Binding DeleteStudentCommand}" Classes="h2" Grid.Row="0" Grid.Column="2"/>
+        </Grid>
+        
+        <Grid Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Classes="h2" Text="    cохранить/загрузить оценки за контрольный срок    " Grid.Column="0"/>
+            <Button Content="cохранить" Command="{Binding SaveCommand}" Classes="h2" Grid.Row="0" Grid.Column="1"/>
+            <Button Content="загрузить" Command="{Binding UploadCommand}" Classes="h2" Grid.Row="0" Grid.Column="2"/>
         </Grid>
         
     </Grid>
