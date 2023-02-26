@@ -3,6 +3,7 @@
         xmlns:vm="using:StudentsMonitoringProgress.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:StudentsMonitoringProgress.Models"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="StudentsMonitoringProgress.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -30,7 +31,7 @@
         <Style Selector="TextBlock.h2">
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
@@ -118,6 +119,9 @@
         </Grid>
         <!-- Список студентов и оценок во второй строке -->
         <ListBox Grid.Row="1" Items="{Binding Students}" SelectedIndex="{Binding Index}">
+            <ListBox.Resources>
+                <models:GradeToColorConverter x:Key="GradeToColorConverter"/>
+            </ListBox.Resources>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -137,20 +141,23 @@
                             <ColumnDefinition Width="1.4*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Classes="h2" Text="{Binding Name}" Grid.Column="0"/>
-                        <TextBlock Classes="h2" Text="{Binding VisualProg}" Grid.Row="0" Grid.Column="1"/>
-                        <TextBlock Classes="h2" Text="{Binding MathAnalysis}" Grid.Row="0" Grid.Column="2"/>
-                        <TextBlock Classes="h2" Text="{Binding Electrotechnic}" Grid.Row="0" Grid.Column="3"/>
-                        <TextBlock Classes="h2" Text="{Binding ComputerMath}" Grid.Row="0" Grid.Column="4"/>
-                        <TextBlock Classes="h2" Text="{Binding PhysicalSport}" Grid.Row="0" Grid.Column="5"/>
-                        <TextBlock Classes="h2" Text="{Binding Architecture}" Grid.Row="0" Grid.Column="6"/>
-                        <TextBlock Classes="h2" Text="{Binding Networks}" Grid.Row="0" Grid.Column="7"/>
-                        <TextBlock Classes="h2" Text="{Binding AverageMark}" Grid.Row="0" Grid.Column="8"/>
+                        <TextBlock Classes="h2" Text="{Binding VisualProg}" Grid.Row="0" Grid.Column="1" Background="{Binding VisualProg, Converter={StaticResource GradeToColorConverter}}"/>
+                        <TextBlock Classes="h2" Text="{Binding MathAnalysis}" Grid.Row="0" Grid.Column="2" Background="{Binding MathAnalysis, Converter={StaticResource GradeToColorConverter}}"/>
+                        <TextBlock Classes="h2" Text="{Binding Electrotechnic}" Grid.Row="0" Grid.Column="3" Background="{Binding Electrotechnic, Converter={StaticResource GradeToColorConverter}}"/>
+                        <TextBlock Classes="h2" Text="{Binding ComputerMath}" Grid.Row="0" Grid.Column="4" Background="{Binding ComputerMath, Converter={StaticResource GradeToColorConverter}}"/>
+                        <TextBlock Classes="h2" Text="{Binding PhysicalSport}" Grid.Row="0" Grid.Column="5" Background="{Binding PhysicalSport, Converter={StaticResource GradeToColorConverter}}"/>
+                        <TextBlock Classes="h2" Text="{Binding Architecture}" Grid.Row="0" Grid.Column="6" Background="{Binding Architecture, Converter={StaticResource GradeToColorConverter}}"/>
+                        <TextBlock Classes="h2" Text="{Binding Networks}" Grid.Row="0" Grid.Column="7" Background="{Binding Networks, Converter={StaticResource GradeToColorConverter}}"/>
+                        <TextBlock Classes="h2" Text="{Binding AverageMark}" Grid.Row="0" Grid.Column="8" Background="{Binding AverageMark, Converter={StaticResource GradeToColorConverter}}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         
         <Grid Grid.Row="2" Margin="10, 20, 10, 20">
+            <Grid.Resources>
+                <models:GradeToColorConverter x:Key="GradeToColorConverter"/>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
@@ -163,14 +170,14 @@
                 <ColumnDefinition Width="1.4*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Classes="h2" Text="СРЕДНИЙ БАЛЛ" Grid.Column="0"/>
-            <TextBlock Classes="h2" Text="{Binding ScVisualProg}" Grid.Column="1"/>
-            <TextBlock Classes="h2" Text="{Binding ScMathAnalysis}" Grid.Column="2"/>
-            <TextBlock Classes="h2" Text="{Binding ScElectrotechnic}" Grid.Column="3"/>
-            <TextBlock Classes="h2" Text="{Binding ScComputerMath}" Grid.Column="4"/>
-            <TextBlock Classes="h2" Text="{Binding ScPhysicalSport}" Grid.Column="5"/>
-            <TextBlock Classes="h2" Text="{Binding ScArchitecture}" Grid.Column="6"/>
-            <TextBlock Classes="h2" Text="{Binding ScNetworks}" Grid.Column="7"/>
-            <TextBlock Classes="h2" Text="{Binding ScAverageMark}" Grid.Column="8"/>
+            <TextBlock Classes="h2" Text="{Binding ScVisualProg}" Grid.Column="1" Background="{Binding ScVisualProg, Converter={StaticResource GradeToColorConverter}}"/>
+            <TextBlock Classes="h2" Text="{Binding ScMathAnalysis}" Grid.Column="2" Background="{Binding ScMathAnalysis, Converter={StaticResource GradeToColorConverter}}"/>
+            <TextBlock Classes="h2" Text="{Binding ScElectrotechnic}" Grid.Column="3" Background="{Binding ScElectrotechnic, Converter={StaticResource GradeToColorConverter}}"/>
+            <TextBlock Classes="h2" Text="{Binding ScComputerMath}" Grid.Column="4" Background="{Binding ScComputerMath, Converter={StaticResource GradeToColorConverter}}"/>
+            <TextBlock Classes="h2" Text="{Binding ScPhysicalSport}" Grid.Column="5" Background="{Binding ScPhysicalSport, Converter={StaticResource GradeToColorConverter}}"/>
+            <TextBlock Classes="h2" Text="{Binding ScArchitecture}" Grid.Column="6" Background="{Binding ScArchitecture, Converter={StaticResource GradeToColorConverter}}"/>
+            <TextBlock Classes="h2" Text="{Binding ScNetworks}" Grid.Column="7" Background="{Binding ScNetworks, Converter={StaticResource GradeToColorConverter}}"/>
+            <TextBlock Classes="h2" Text="{Binding ScAverageMark}" Grid.Column="8" Background="{Binding ScAverageMark, Converter={StaticResource GradeToColorConverter}}"/>
             <Border Grid.Row="0" Grid.Column="0"  BorderBrush="Black"  BorderThickness="1" />
             <Border Grid.Row="0" Grid.Column="1"  BorderBrush="Black"  BorderThickness="1" />
             <Border Grid.Row="0" Grid.Column="2"  BorderBrush="Black"  BorderThickness="1" />

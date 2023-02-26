@@ -85,14 +85,14 @@ namespace StudentsMonitoringProgress.ViewModels
             double averageArchitecture = Math.Round(sumArchitecture / count, 2);
             double averageNetworks = Math.Round(sumNetworks / count, 2);
             // Устанавливаем значения свойств для отображения в интерфейсе
-            ScVisualProg = averageVisualProg.ToString(CultureInfo.InvariantCulture);
-            ScMathAnalysis = averageMathAnalysis.ToString(CultureInfo.InvariantCulture);
-            ScElectrotechnic = averageElectrotechnic.ToString(CultureInfo.InvariantCulture);
-            ScComputerMath = averageComputerMath.ToString(CultureInfo.InvariantCulture);
-            ScPhysicalSport = averagePhysicalSport.ToString(CultureInfo.InvariantCulture);
-            ScArchitecture = averageArchitecture.ToString(CultureInfo.InvariantCulture);
-            ScNetworks = averageNetworks.ToString(CultureInfo.InvariantCulture);
-            ScAverageMark = Math.Round((averageVisualProg + averageMathAnalysis + averageElectrotechnic + averageComputerMath + averagePhysicalSport + averageArchitecture + averageNetworks) / 7, 2).ToString(CultureInfo.InvariantCulture);
+            ScVisualProg = averageVisualProg.ToString("N2", CultureInfo.InvariantCulture);
+            ScMathAnalysis = averageMathAnalysis.ToString("N2", CultureInfo.InvariantCulture);
+            ScElectrotechnic = averageElectrotechnic.ToString("N2", CultureInfo.InvariantCulture);
+            ScComputerMath = averageComputerMath.ToString("N2", CultureInfo.InvariantCulture);
+            ScPhysicalSport = averagePhysicalSport.ToString("N2", CultureInfo.InvariantCulture);
+            ScArchitecture = averageArchitecture.ToString("N2", CultureInfo.InvariantCulture);
+            ScNetworks = averageNetworks.ToString("N2", CultureInfo.InvariantCulture);
+            ScAverageMark = Math.Round((averageVisualProg + averageMathAnalysis + averageElectrotechnic + averageComputerMath + averagePhysicalSport + averageArchitecture + averageNetworks) / 7, 2).ToString("N2", CultureInfo.InvariantCulture);
         }
         public ReactiveCommand<Unit, Unit> AddStudentCommand { get; }
         public ReactiveCommand<Unit, Unit> DeleteStudentCommand { get; }
@@ -143,14 +143,14 @@ namespace StudentsMonitoringProgress.ViewModels
                     totalArchitecture += student.Architecture;
                     totalNetworks += student.Networks;
                 }
-                ScAverageMark = (total / Students.Count).ToString(CultureInfo.InvariantCulture);
-                ScVisualProg = (totalVisualProg / Students.Count).ToString(CultureInfo.InvariantCulture);
-                ScMathAnalysis = (totalMathAnalysis / Students.Count).ToString(CultureInfo.InvariantCulture);
-                ScElectrotechnic = (totalElectrotechnic / Students.Count).ToString(CultureInfo.InvariantCulture);
-                ScComputerMath = (totalComputerMath / Students.Count).ToString(CultureInfo.InvariantCulture);
-                ScPhysicalSport = (totalPhysicalSport / Students.Count).ToString(CultureInfo.InvariantCulture);
-                ScArchitecture = (totalArchitecture / Students.Count).ToString(CultureInfo.InvariantCulture);
-                ScNetworks = (totalNetworks / Students.Count).ToString(CultureInfo.InvariantCulture);
+                ScAverageMark = (total / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
+                ScVisualProg = (totalVisualProg / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
+                ScMathAnalysis = (totalMathAnalysis / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
+                ScElectrotechnic = (totalElectrotechnic / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
+                ScComputerMath = (totalComputerMath / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
+                ScPhysicalSport = (totalPhysicalSport / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
+                ScArchitecture = (totalArchitecture / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
+                ScNetworks = (totalNetworks / Students.Count).ToString("N2", CultureInfo.InvariantCulture);
             }
             OnPropertyChanged(nameof(ScAverageMark));
             OnPropertyChanged(nameof(ScVisualProg));
@@ -226,6 +226,7 @@ namespace StudentsMonitoringProgress.ViewModels
         private void ExecuteSaveCommand()
         {
             Serialization.SaveDataToXmlFile(Students, "../../../StudentsData.xml");
+            UpdateScAverageMarks();
         }
         private void ExecuteUploadCommand()
         {

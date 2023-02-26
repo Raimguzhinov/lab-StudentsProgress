@@ -1,59 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Student>
-    <Name>Константин Ефремов</Name>
-    <VisualProg>0</VisualProg>
-    <MathAnalysis>1</MathAnalysis>
-    <Electrotechnic>2</Electrotechnic>
-    <ComputerMath>0</ComputerMath>
-    <PhysicalSport>1</PhysicalSport>
-    <Architecture>1</Architecture>
-    <Networks>1</Networks>
-    <AverageMark>1</AverageMark>
-  </Student>
-  <Student>
-    <Name>Сергей Малеев</Name>
+    <Name>Максим Назипов</Name>
     <VisualProg>0</VisualProg>
     <MathAnalysis>2</MathAnalysis>
     <Electrotechnic>2</Electrotechnic>
-    <ComputerMath>0</ComputerMath>
-    <PhysicalSport>2</PhysicalSport>
-    <Architecture>1</Architecture>
-    <Networks>1</Networks>
-    <AverageMark>1.33</AverageMark>
-  </Student>
-  <Student>
-    <Name>Максим Назипов</Name>
-    <VisualProg>0</VisualProg>
-    <MathAnalysis>1</MathAnalysis>
-    <Electrotechnic>2</Electrotechnic>
     <ComputerMath>1</ComputerMath>
-    <PhysicalSport>1</PhysicalSport>
-    <Architecture>1</Architecture>
-    <Networks>1</Networks>
-    <AverageMark>1.17</AverageMark>
-  </Student>
-  <Student>
-    <Name>Диас Раймгужинов</Name>
-    <VisualProg>1</VisualProg>
-    <MathAnalysis>1</MathAnalysis>
-    <Electrotechnic>2</Electrotechnic>
-    <ComputerMath>0</ComputerMath>
     <PhysicalSport>2</PhysicalSport>
     <Architecture>2</Architecture>
-    <Networks>0</Networks>
-    <AverageMark>1.17</AverageMark>
-  </Student>
-  <Student>
-    <Name>Владислав Перчун</Name>
-    <VisualProg>0</VisualProg>
-    <MathAnalysis>1</MathAnalysis>
-    <Electrotechnic>2</Electrotechnic>
-    <ComputerMath>0</ComputerMath>
-    <PhysicalSport>1</PhysicalSport>
-    <Architecture>1</Architecture>
     <Networks>1</Networks>
-    <AverageMark>1</AverageMark>
+    <AverageMark>1.67</AverageMark>
   </Student>
   <Student>
     <Name>Даниил Шлипев</Name>
@@ -61,9 +17,53 @@
     <MathAnalysis>2</MathAnalysis>
     <Electrotechnic>2</Electrotechnic>
     <ComputerMath>1</ComputerMath>
-    <PhysicalSport>2</PhysicalSport>
+    <PhysicalSport>1</PhysicalSport>
     <Architecture>1</Architecture>
+    <Networks>0</Networks>
+    <AverageMark>1.17</AverageMark>
+  </Student>
+  <Student>
+    <Name>Константин Ефремов</Name>
+    <VisualProg>0</VisualProg>
+    <MathAnalysis>1</MathAnalysis>
+    <Electrotechnic>2</Electrotechnic>
+    <ComputerMath>1</ComputerMath>
+    <PhysicalSport>1</PhysicalSport>
+    <Architecture>1</Architecture>
+    <Networks>0</Networks>
+    <AverageMark>1</AverageMark>
+  </Student>
+  <Student>
+    <Name>Диас Раймгужинов</Name>
+    <VisualProg>0</VisualProg>
+    <MathAnalysis>1</MathAnalysis>
+    <Electrotechnic>2</Electrotechnic>
+    <ComputerMath>1</ComputerMath>
+    <PhysicalSport>2</PhysicalSport>
+    <Architecture>2</Architecture>
     <Networks>1</Networks>
     <AverageMark>1.5</AverageMark>
+  </Student>
+  <Student>
+    <Name>Владислав Перчун</Name>
+    <VisualProg>1</VisualProg>
+    <MathAnalysis>2</MathAnalysis>
+    <Electrotechnic>2</Electrotechnic>
+    <ComputerMath>1</ComputerMath>
+    <PhysicalSport>1</PhysicalSport>
+    <Architecture>2</Architecture>
+    <Networks>1</Networks>
+    <AverageMark>1.5</AverageMark>
+  </Student>
+  <Student>
+    <Name>ми</Name>
+    <VisualProg>0</VisualProg>
+    <MathAnalysis>0</MathAnalysis>
+    <Electrotechnic>0</Electrotechnic>
+    <ComputerMath>0</ComputerMath>
+    <PhysicalSport>0</PhysicalSport>
+    <Architecture>0</Architecture>
+    <Networks>0</Networks>
+    <AverageMark>0</AverageMark>
   </Student>
 </ArrayOfStudent>
